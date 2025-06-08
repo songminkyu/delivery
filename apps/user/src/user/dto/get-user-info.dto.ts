@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsString } from "class-validator";
 
-export class ParseBearerTokenDto{
+export class GetUserInfoDto {
     @IsString()
     @IsNotEmpty()
-    token: string;
+    userId: string;
 }

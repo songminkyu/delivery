@@ -1,16 +1,10 @@
-import {
-  Body,
-  Controller,
-  Post,
-  UsePipes,
-  UnauthorizedException,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Body, Controller, Post, UnauthorizedException, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { RegisterDto } from './dto/register-dto';
 import { Authorization } from './decorator/authorization.decorator';
-import { MessagePattern, Payload } from '@nestjs/microservices';
+import { EventPattern, MessagePattern, Payload, RpcException } from '@nestjs/microservices';
+import { RegisterDto } from './dto/register.dto';
 import { ParseBearerTokenDto } from './dto/parse-bearer-token.dto';
+import { RpcInterceptor } from '@app/common/interceptor/rpc.interceptor';
 
 @Controller('auth')
 export class AuthController {
@@ -18,34 +12,30 @@ export class AuthController {
 
   @Post('register')
   @UsePipes(ValidationPipe)
-  registerUser(
-    @Authorization() token: string,
-    @Body() registerDto: RegisterDto,
-  ) {
-    if (token === null) {
-      throw new UnauthorizedException('토큰을 입력 해주세요!!.');
+  registerUser(@Authorization() token: string, @Body() registerDto: RegisterDto){
+    if(token === null){
+      throw new UnauthorizedException('토큰을 입력해주세요!');
     }
+
     return this.authService.register(token, registerDto);
   }
 
   @Post('login')
   @UsePipes(ValidationPipe)
-  loginUser(@Authorization() token: string) {
-    if (token === null) {
-      throw new UnauthorizedException('토큰을 입력 해주세요!!.');
+  loginUser(@Authorization() token: string){
+    if(token === null){
+      throw new UnauthorizedException('토큰을 입력해주세요!')
     }
 
     return this.authService.login(token);
   }
 
-  //@MessagePattern 요청/응답 처리하고,
-  //@EventPattern은 요청만 처리한다.
   @MessagePattern({
-    cmd: 'parse_bearer_token',
+    cmd: 'parse_bearer_token'
   })
   @UsePipes(ValidationPipe)
-  parseBearerToken(@Payload() payload: ParseBearerTokenDto) {
-    console.log('Request reactive');
+  @UseInterceptors(RpcInterceptor)
+  parseBearerToken(@Payload() payload: ParseBearerTokenDto){
     return this.authService.parseBearerToken(payload.token, false);
   }
 }
