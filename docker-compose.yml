@@ -63,7 +63,7 @@ services:
     volumes:
       - ./postgres/product:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -127,11 +127,11 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
     ports:
-      - '6004:5432'
+      - '6005:5432'
     volumes:
       - ./postgres/payment:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -170,4 +170,3 @@ services:
       timeout: 5s
       retries: 10
       start_period: 5s
-
