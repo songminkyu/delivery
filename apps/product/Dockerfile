@@ -17,6 +17,7 @@ RUN pnpm i
 
 # 나머지 파일/폴더 복사해오기
 COPY apps/product apps/product
+COPY libs libs
 
 RUN pnpm build product
 

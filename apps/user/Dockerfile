@@ -19,6 +19,6 @@ RUN pnpm i
 COPY apps/user apps/user
 
 RUN pnpm build user
-
+COPY libs libs
 # 커맨드 실행
 CMD ["pnpm", "start:dev", "user"]
