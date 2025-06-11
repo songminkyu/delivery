@@ -2,14 +2,14 @@ version: '3.1'
 
 services:
   gateway:
-    image: codefactoryofficial/fc-nestjs-gateway
+    image: songminkyu/fc-nestjs-gateway
     env_file:
       - ./apps/gateway/.env
     ports:
       - '3000:3000'
 
   user:
-    image: codefactoryofficial/fc-nestjs-user
+    image: songminkyu/fc-nestjs-user
     depends_on:
       postgres_user:
         condition: service_healthy
@@ -34,7 +34,7 @@ services:
       start_period: 5s
 
   product:
-    image: codefactoryofficial/fc-nestjs-product
+    image: songminkyu/fc-nestjs-product
     depends_on:
       postgres_product:
         condition: service_healthy
@@ -59,7 +59,7 @@ services:
       start_period: 5s
 
   order:
-    image: codefactoryofficial/fc-nestjs-order
+    image: songminkyu/fc-nestjs-order
     depends_on:
       mongo_order:
         condition: service_healthy
@@ -84,7 +84,7 @@ services:
       start_period: 5s
 
   payment:
-    image: codefactoryofficial/fc-nestjs-payment
+    image: songminkyu/fc-nestjs-payment
     depends_on:
       postgres_payment:
         condition: service_healthy
@@ -109,7 +109,7 @@ services:
       start_period: 5s
 
   notification:
-    image: codefactoryofficial/fc-nestjs-notification
+    image: songminkyu/fc-nestjs-notification
     depends_on:
       mongo_notification:
         condition: service_healthy
