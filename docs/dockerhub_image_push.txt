@@ -1,0 +1,13 @@
+docker buildx build --platform linux/amd64 -t songminkyu/fc-nestjs-gateway -f ./apps/gateway/Dockerfile --target production .
+docker buildx build --platform linux/amd64 -t songminkyu/fc-nestjs-notification -f ./apps/notification/Dockerfile --target production .
+docker buildx build --platform linux/amd64 -t songminkyu/fc-nestjs-order -f ./apps/order/Dockerfile --target production .
+docker buildx build --platform linux/amd64 -t songminkyu/fc-nestjs-payment -f ./apps/payment/Dockerfile --target production .
+docker buildx build --platform linux/amd64 -t songminkyu/fc-nestjs-product -f ./apps/product/Dockerfile --target production .
+docker buildx build --platform linux/amd64 -t songminkyu/fc-nestjs-user -f ./apps/user/Dockerfile --target production .
+
+docker push songminkyu/fc-nestjs-gateway:latest
+docker push songminkyu/fc-nestjs-notification:latest
+docker push songminkyu/fc-nestjs-order:latest
+docker push songminkyu/fc-nestjs-payment:latest
+docker push songminkyu/fc-nestjs-product:latest
+docker push songminkyu/fc-nestjs-user:latest
