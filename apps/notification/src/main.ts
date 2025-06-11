@@ -15,7 +15,7 @@ async function bootstrap() {
       package: NotificationMicroservice.protobufPackage,
       protoPath: join(process.cwd(), 'proto/notification.proto'),
       url: configService.getOrThrow('GRPC_URL'),
-    }
+    },
   });
 
   await app.init();
