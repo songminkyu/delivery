@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-user-deployment
+  labels:
+    app: user
+spec:
+  replicas: {{ .Values.user.replicas }}
+  selector:
+    matchLabels:
+      app: user
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: user
+    spec:
+      containers:
+        - image: songminkyu/fc-nestjs-user:latest
+          name: user-container
+          envFrom:
+            - configMapRef:
+                name: user-config-map
+          ports:
+            - containerPort: 3000
+          livenessProbe:
+            httpGet:
+              port: 3000
+              path: "/health"
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              port: 3000
+              path: "/health"
+            periodSeconds: 5
+
+
+
+

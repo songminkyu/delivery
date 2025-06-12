@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-payment-deployment
+  labels:
+    app: payment
+spec:
+  replicas: {{ .Values.payment.replicas }}
+  selector:
+    matchLabels:
+      app: payment
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: payment
+    spec:
+      containers:
+        - image: songminkyu/fc-nestjs-payment:latest
+          name: payment-container
+          envFrom:
+            - configMapRef:
+                name: payment-config-map
+          ports:
+            - containerPort: 3000
+          livenessProbe:
+            httpGet:
+              port: 3000
+              path: "/health"
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              port: 3000
+              path: "/health"
+            periodSeconds: 5
+
+
+
+
