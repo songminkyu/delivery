@@ -4,7 +4,7 @@ metadata:
   name: payment-config-map
 data:
   TCP_PORT: "3001"
-  GRPC_URL: "payment:3001"
+  GRPC_URL: "0.0.0.0:3001"
   NOTIFICATION_HOST: "notification"
   NOTIFICATION_TCP_PORT: "3001"
-  NOTIFICATION_GRPC_URL: "notification:3001"
+  NOTIFICATION_GRPC_URL: "{{ .Chart.Name }}-notification-cluster-ip:3001"

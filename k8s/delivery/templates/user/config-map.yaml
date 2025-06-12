@@ -5,7 +5,7 @@ metadata:
 data:
   HTTP_PORT: "3000"
   TCP_PORT: "3001"
-  GRPC_URL: "user:3001"
+  GRPC_URL: "0.0.0.0:3001"
   REFRESH_TOKEN_SECRET: "codefactoryrefresh"
   ACCESS_TOKEN_SECRET: "codefactoryaccess"
 

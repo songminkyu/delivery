@@ -25,19 +25,15 @@ spec:
           envFrom:
             - configMapRef:
                 name: order-config-map
+            - secretRef:
+                name: order-secret
           ports:
-            - containerPort: 3000
+            - containerPort: 3001
           livenessProbe:
-            httpGet:
-              port: 3000
-              path: "/health"
+            tcpSocket:
+              port: 3001
             periodSeconds: 5
           readinessProbe:
-            httpGet:
-              port: 3000
-              path: "/health"
+            tcpSocket:
+              port: 3001
             periodSeconds: 5
-
-
-
-
