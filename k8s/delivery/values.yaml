@@ -11,7 +11,7 @@ order:
 
 payment:
   replicas: 1
-  db_url: "실제 postgresql 서버"
+  db_url: "실제 postgresql URL"
 
 product:
   replicas: 1
