@@ -3,10 +3,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as Joi from 'joi';
 import { PaymentModule } from './payment/payment.module';
-import { ClientsModule, Transport } from '@nestjs/microservices';
+import { ClientsModule, GrpcOptions, Transport } from '@nestjs/microservices';
 import { NOTIFICATION_SERVICE, NotificationMicroservice } from '@app/common';
 import { join } from 'path';
 import { traceInterceptor } from '@app/common';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
@@ -33,11 +34,17 @@ import { traceInterceptor } from '@app/common';
       }),
       inject: [ConfigService],
     }),
+    MongooseModule.forRootAsync({
+      useFactory: (configService: ConfigService) => ({
+        uri: configService.getOrThrow('MONGO_DB_URL'),
+      }),
+      inject: [ConfigService],
+    }),
     ClientsModule.registerAsync({
       clients: [
         {
           name: NOTIFICATION_SERVICE,
-          useFactory: (configService: ConfigService) => ({
+          useFactory: (configService: ConfigService): GrpcOptions => ({
             transport: Transport.GRPC,
             options: {
               channelOptions: {

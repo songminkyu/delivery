@@ -15,7 +15,7 @@ async function bootstrap() {
       package: PaymentMicroservice.protobufPackage,
       protoPath: join(process.cwd(), 'proto/payment.proto'),
       url: configService.getOrThrow('GRPC_URL'),
-    }
+    },
   });
 
   await app.init();
