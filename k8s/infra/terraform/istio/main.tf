@@ -153,6 +153,10 @@ module "eks_blueprints_addons" {
         {
           name  = "meshConfig.accessLogFile"
           value = "/dev/stdout"
+        },
+        {
+          name  = "meshConfig.defaultConfig.tracing.sampling"
+          value = "100"
         }
       ]
     }
