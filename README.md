@@ -157,6 +157,7 @@ API 문서는 Postman 컬렉션으로 제공됩니다. `docs/NestJS Microservice
 
 ```
 delivery/
+├── .github/                # GitHub 관련 설정
 ├── apps/                   # 마이크로서비스 애플리케이션
 │   ├── gateway/            # API 게이트웨이 (포트: 3000)
 │   │   ├── src/            # 소스 코드
@@ -185,6 +186,16 @@ delivery/
 │       ├── src/            # 소스 코드
 │       │   └── notification/ # 알림 관련 코드
 │       └── Dockerfile      # Docker 빌드 설정
+├── docs/                   # 문서
+│   ├── auth-login-scripts.md # 인증 및 로그인 스크립트 문서
+│   ├── dockerhub_image_push.txt # Docker Hub 이미지 푸시 가이드
+│   ├── NestJS Microservice.postman_environment.json # Postman 환경 설정
+│   └── post_order.md       # 주문 생성 관련 문서
+├── k8s/                    # 쿠버네티스 및 Helm 관련 설정
+│   ├── delivery/           # 배달 서비스 쿠버네티스 설정
+│   ├── helm/               # Helm 차트
+│   ├── infra/              # 인프라 관련 설정
+│   └── kubernetes/         # 쿠버네티스 기본 설정
 ├── libs/                   # 공유 라이브러리
 │   └── common/             # 공통 모듈
 │       ├── src/            # 소스 코드
@@ -199,29 +210,23 @@ delivery/
 │   ├── payment.proto       # 결제 서비스 프로토콜
 │   ├── product.proto       # 상품 서비스 프로토콜
 │   └── user.proto          # 사용자 서비스 프로토콜
-├── docs/                   # 문서
-│   └── NestJS Microservice.postman_environment.json # Postman 환경 설정
-├── tutorial/               # 튜토리얼 및 예제
-│   ├── kubernetes/         # 쿠버네티스 배포 예제
-│   │   ├── 1_pod/          # 파드 예제
-│   │   ├── 2_replicaset/   # 레플리카셋 예제
-│   │   ├── 3_deployment/   # 디플로이먼트 예제
-│   │   ├── 4_namespace/    # 네임스페이스 예제
-│   │   ├── 5_config/       # 설정 예제
-│   │   ├── 6_probe/        # 프로브 예제
-│   │   ├── 7_node_port/    # 노드 포트 예제
-│   │   ├── 8_cluster_ip/   # 클러스터 IP 예제
-│   │   └── 9_persistent_volume/ # 퍼시스턴트 볼륨 예제
-│   └── helm/               # Helm 차트 예제
-│       └── codefactory/    # 코드팩토리 Helm 차트
-├── docker-compose.yml      # Docker Compose 설정
+├── build-and-push-ps.ps1   # PowerShell 스크립트 (Docker 이미지 빌드 및 푸시)
+├── build-and-push.sh       # Bash 스크립트 (Docker 이미지 빌드 및 푸시)
+├── docker-compose.image-test.yml # Docker Compose 이미지 테스트 설정
+├── docker-compose.prod.yml # Docker Compose 프로덕션 설정
+├── docker-compose.yml      # Docker Compose 개발 설정
+├── nest-cli.json           # NestJS CLI 설정
 ├── package.json            # 프로젝트 메타데이터 및 의존성
-└── tsconfig.json           # TypeScript 설정
+├── pnpm-lock.yaml          # pnpm 락 파일
+├── run-docker-compose.ps1  # PowerShell 스크립트 (Docker Compose 실행)
+├── tsconfig.build.json     # TypeScript 빌드 설정
+├── tsconfig.json           # TypeScript 기본 설정
+└── webpack.config.js       # Webpack 설정
 ```
 
 ## 쿠버네티스 배포
 
-프로젝트는 쿠버네티스 배포를 위한 설정 파일을 포함하고 있습니다. `tutorial/kubernetes` 디렉토리에서 다음과 같은 쿠버네티스 리소스 예제를 확인할 수 있습니다:
+프로젝트는 쿠버네티스 배포를 위한 설정 파일을 포함하고 있습니다. `k8s/kubernetes` 디렉토리에서 다음과 같은 쿠버네티스 리소스 예제를 확인할 수 있습니다:
 
 - 파드 (Pod)
 - 레플리카셋 (ReplicaSet)
@@ -232,7 +237,7 @@ delivery/
 - 서비스 (NodePort, ClusterIP)
 - 퍼시스턴트 볼륨 (PersistentVolume)과 퍼시스턴트 볼륨 클레임 (PersistentVolumeClaim)
 
-또한 `tutorial/helm` 디렉토리에서 Helm 차트를 통한 배포 예제를 확인할 수 있습니다.
+또한 `k8s/helm` 디렉토리에서 Helm 차트를 통한 배포 예제를 확인할 수 있습니다. 실제 배포 설정은 `k8s/delivery` 디렉토리에서 확인할 수 있으며, 인프라 관련 설정은 `k8s/infra` 디렉토리에 있습니다.
 
 ## 기여 방법
 
