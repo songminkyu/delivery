@@ -15,7 +15,7 @@ export class MakePaymentResponseMapper {
       paymentMethod: this.parsePaymentMethod(payment.paymentMethod),
     });
 
-    return newOrder;
+    return order;
   }
   private parsePaymentMethod(paymentMethod: string) {
     switch (paymentMethod) {
