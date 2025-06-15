@@ -415,7 +415,7 @@ config:
         Match kube.*
         Host elasticsearch-master
         HTTP_USER elastic
-        HTTP_Passwd 비밀번호 넣어라!!
+        HTTP_Passwd your_actual_password_here
         tls On
         tls.verify Off
         tls.verify_hostname Off
