@@ -61,8 +61,8 @@
 1. 저장소 클론:
 
 ```bash
-$ git clone <repository-url>
-$ cd delivery
+$ git clone https://github.com/songminkyu/delivery-microservices.git
+$ cd delivery-microservice
 ```
 
 2. 의존성 설치:
@@ -186,6 +186,7 @@ delivery/
 │       ├── src/            # 소스 코드
 │       │   └── notification/ # 알림 관련 코드
 │       └── Dockerfile      # Docker 빌드 설정
+├── envs/                   # 환경변수 설정 파일 템플릿 및 샘플
 ├── docs/                   # 문서
 │   ├── auth-login-scripts.md # 인증 및 로그인 스크립트 문서
 │   ├── dockerhub_image_push.txt # Docker Hub 이미지 푸시 가이드
@@ -193,6 +194,8 @@ delivery/
 │   └── post_order.md       # 주문 생성 관련 문서
 ├── k8s/                    # 쿠버네티스 및 Helm 관련 설정
 │   ├── delivery/           # 배달 서비스 쿠버네티스 설정
+│   ├── efk-delivery/       # EFK 스택 (Elasticsearch, Fluentd, Kibana) 로그 수집 및 분석 설정
+│   ├── fluentbit/          # Fluent Bit 로그 수집기 설정
 │   ├── helm/               # Helm 차트
 │   ├── infra/              # 인프라 관련 설정
 │   └── kubernetes/         # 쿠버네티스 기본 설정
